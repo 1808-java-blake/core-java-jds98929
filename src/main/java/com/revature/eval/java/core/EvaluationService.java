@@ -30,8 +30,25 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		int numSpaces = 0;
+		int numHyphens = 0;
+		for (int i = 0; i < phrase.length(); i++) {
+			if (phrase.charAt(i) == ' ') numSpaces++;
+			if (phrase.charAt(i) == '-') numHyphens++;
+		}
+		char[] acro = new char[numSpaces + numHyphens + 1];
+		int counter = 0;
+		while (phrase.indexOf(' ') >= 0 || phrase.indexOf('-') >= 0) {
+			acro[counter] = phrase.toUpperCase().charAt(0);
+			if (phrase.indexOf('-') >= 0 && phrase.indexOf('-') < phrase.indexOf(' ')){
+				phrase = phrase.substring(phrase.indexOf('-') + 1);
+			} else {
+				phrase = phrase.substring(phrase.indexOf(' ') + 1);
+			}
+			counter++;
+		}
+		acro[counter] = phrase.toUpperCase().charAt(0);
+		return new String(acro);
 	}
 
 	/**
