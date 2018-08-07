@@ -136,8 +136,41 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		int score = 0;
+		String upperCaseString = string.toUpperCase();
+		
+		char[] ones = {'A', 'E', 'I', 'O', 'U', 'L', 'N', 'R', 'S', 'T'};
+		char[] twos = {'D', 'G'};
+		char[] threes = {'B', 'C', 'M', 'P'};
+		char[] fours = {'F', 'H', 'V', 'W', 'Y'};
+		char[] fives = {'K'};
+		char[] eights = {'J', 'X'};
+		char[] tens = {'Q', 'Z'};
+		
+		for (int i = 0; i < upperCaseString.length(); i++) {
+			for(char c : ones) {
+				if (upperCaseString.charAt(i) == c) score += 1;
+			}
+			for(char c : twos) {
+				if (upperCaseString.charAt(i) == c) score += 2;
+			}
+			for(char c : threes) {
+				if (upperCaseString.charAt(i) == c) score += 3;
+			}
+			for(char c : fours) {
+				if (upperCaseString.charAt(i) == c) score += 4;
+			}
+			for(char c : fives) {
+				if (upperCaseString.charAt(i) == c) score += 5;
+			}
+			for(char c : eights) {
+				if (upperCaseString.charAt(i) == c) score += 8;
+			}
+			for(char c : tens) {
+				if (upperCaseString.charAt(i) == c) score += 10;
+			}
+		}
+		return score;
 	}
 
 	/**
