@@ -420,8 +420,37 @@ public class EvaluationService {
 	 * @return
 	 */
 	public List<Long> calculatePrimeFactorsOf(long l) {
-		// TODO Write an implementation for this method declaration
-		return null;
+        List<Long> primeFactors = new ArrayList<Long>();
+        for (long x = 2; x <= l; x++) {
+            while (l % x == 0) {
+                primeFactors.add(x);
+                l /= x;
+            }
+        }
+        return primeFactors;
+
+//		List<Long> primeFactorList = new ArrayList<Long>();
+//		List<Long> primeFactorList2 = new ArrayList<Long>();
+//		boolean isPrime;
+//		for(long x = 2; x <= l; x++) {
+//			if (l % x == 0 ) {
+//				primeFactorList.add(x);
+//				System.out.println(primeFactorList);
+//			}
+//		}
+//		for(Long factor : primeFactorList) {
+//			isPrime = true;
+//			for (long y = 2; y <= factor; y++) {
+//				if (factor % y == 0 && y != factor && y != 2)  {
+//					isPrime = false;
+//				}
+//			}
+//			if (isPrime == true) {
+//				primeFactorList2.add(factor);
+//			}
+//		}
+//		System.out.println(primeFactorList2);
+//		return primeFactorList2;
 	}
 
 	/**
