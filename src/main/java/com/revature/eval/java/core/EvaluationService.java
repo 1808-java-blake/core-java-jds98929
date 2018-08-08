@@ -4,6 +4,7 @@ import java.time.temporal.Temporal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.HashMap;
 
 public class EvaluationService {
 
@@ -212,8 +213,7 @@ public class EvaluationService {
 			try {
 				list.add(Integer.parseInt(String.valueOf(string.charAt(i))));
 			} catch (NumberFormatException n) {
-				continue;
-			}
+				continue;			}
 		}
 		int firstDigit = list.get(0);
 		if (firstDigit == 1) {
@@ -223,7 +223,7 @@ public class EvaluationService {
 			cleanedNumber += String.valueOf(i);
 		}
 		if (cleanedNumber.length() > 10 || cleanedNumber.length() < 10) {
-			return "Invalid phone number";
+			throw new IllegalArgumentException();
 		}
 		return cleanedNumber;
 		
@@ -239,8 +239,33 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Map<String, Integer> wordCount(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		Map<String,Integer> m = new HashMap<String,Integer>();
+		boolean inWord = false;
+		int endOfLine = string.length() - 1;
+		char[] chars = string.toCharArray();
+		String temp = "";
+		
+		for(int i = 0; i < chars.length; i++) { 
+			if (Character.isLetter(chars[i]) && i != endOfLine) { 
+				inWord = true;
+				temp += chars[i];
+			} else if (!Character.isLetter(chars[i]) && inWord) { 
+			    m.put(temp, 0); 
+			    temp = "";
+				inWord = false;  
+			} else if (Character.isLetter(chars[i]) && i == endOfLine) { 
+				temp += chars[i];
+				m.put(temp, 0);
+			}
+		}
+		for(Map.Entry<String, Integer> entry: m.entrySet()) {
+			for(int i = 0; i < string.length() - entry.getKey().length() + 1; i++) {
+				if (entry.getKey().equals(string.substring(i,i + entry.getKey().length()))) {
+					entry.setValue(entry.getValue() + 1);
+				}
+			}
+	    }
+		return m;
 	}
 
 	/**
@@ -319,8 +344,36 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String toPigLatin(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String[] words = string.split(" ");
+		StringBuilder sb = new StringBuilder();
+		for (int j= 0; j < words.length; j++) {
+			int index = 0;
+			if (j > 0) {
+				sb.append(" ");
+			}
+			boolean a = (string.charAt(index) == 'a');
+			boolean e = (string.charAt(index) == 'e');
+			boolean i = (string.charAt(index) == 'i');
+			boolean o = (string.charAt(index) == 'o');
+			boolean u = (string.charAt(index) == 'u');
+			String temp = "";
+			
+			if (a || e || i || o || u) {
+				sb.append(string);
+				sb.append("ay");
+			} else {
+				while (!(string.charAt(index) == 'a') && !(string.charAt(index) == 'e') 
+						&& !(string.charAt(index) == 'i') && !(string.charAt(index) == 'o') 
+						&& !(string.charAt(index) == 'u')) {
+					temp += words[j].charAt(index);
+					index++;
+				}	
+				sb.append(words[j].substring(temp.length(), words[j].length()));
+				sb.append(temp);
+				sb.append("ay");			
+			}			
+		}
+	return sb.toString();
 	}
 
 	/**
