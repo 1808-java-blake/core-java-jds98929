@@ -428,29 +428,6 @@ public class EvaluationService {
             }
         }
         return primeFactors;
-
-//		List<Long> primeFactorList = new ArrayList<Long>();
-//		List<Long> primeFactorList2 = new ArrayList<Long>();
-//		boolean isPrime;
-//		for(long x = 2; x <= l; x++) {
-//			if (l % x == 0 ) {
-//				primeFactorList.add(x);
-//				System.out.println(primeFactorList);
-//			}
-//		}
-//		for(Long factor : primeFactorList) {
-//			isPrime = true;
-//			for (long y = 2; y <= factor; y++) {
-//				if (factor % y == 0 && y != factor && y != 2)  {
-//					isPrime = false;
-//				}
-//			}
-//			if (isPrime == true) {
-//				primeFactorList2.add(factor);
-//			}
-//		}
-//		System.out.println(primeFactorList2);
-//		return primeFactorList2;
 	}
 
 	/**
@@ -488,8 +465,28 @@ public class EvaluationService {
 		}
 
 		public String rotate(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			boolean wasUpperCase;
+			String alphabet = "abcdefghijklmnopqrstuvwxyzabcdefghijklmnopqrstuvwxyz";
+			char[] cypher = new char [string.length()];
+			for(int i = 0; i < string.length(); i++) {
+				wasUpperCase = false;
+				if (Character.isLetter(string.charAt(i))) {
+					if (Character.isUpperCase(string.charAt(i))){
+						wasUpperCase = true;
+					}
+					char letter = string.toLowerCase().charAt(i);
+					int index = alphabet.indexOf(letter);
+					index += this.key;
+					if (wasUpperCase == true) {
+						cypher[i] = alphabet.toUpperCase().charAt(index);
+					} else {
+						cypher[i] = alphabet.charAt(index);
+					}
+				} else {
+					cypher[i] = string.charAt(i);
+				}
+			}
+			return new String (cypher);
 		}
 
 	}
