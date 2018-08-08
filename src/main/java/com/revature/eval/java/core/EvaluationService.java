@@ -1,6 +1,7 @@
 package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -205,8 +206,27 @@ public class EvaluationService {
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
 	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		ArrayList<Integer> list = new ArrayList<>();
+		String cleanedNumber="";
+		for(int i = 0; i < string.length(); i++) {
+			try {
+				list.add(Integer.parseInt(String.valueOf(string.charAt(i))));
+			} catch (NumberFormatException n) {
+				continue;
+			}
+		}
+		int firstDigit = list.get(0);
+		if (firstDigit == 1) {
+			list.remove(0);
+		}
+		for (int i : list) {
+			cleanedNumber += String.valueOf(i);
+		}
+		if (cleanedNumber.length() > 10 || cleanedNumber.length() < 10) {
+			return "Invalid phone number";
+		}
+		return cleanedNumber;
+		
 	}
 
 	/**
