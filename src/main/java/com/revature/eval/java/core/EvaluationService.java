@@ -630,7 +630,31 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isValidIsbn(String string) {
-		// TODO Write an implementation for this method declaration
+		int index = 0;
+		int isbnSum = 0;
+		int[] isbn = new int[10];
+		for (int i = 0; i < string.length() - 1; i++) {
+			if (Character.isDigit(string.charAt(i))) {
+				isbn[index] = (int)string.charAt(i);
+				index++;
+			}
+			if (Character.isLetter(string.charAt(i))) {		
+				return false;
+			}
+		}
+		if (string.charAt(string.length()-1) == 'X') {
+			isbn[index] = 10;
+		} else if (Character.isDigit(string.charAt(string.length() - 1))) {
+			isbn[index] = (int)string.charAt(string.length() - 1);
+		} else {
+			return false;
+		}
+		for (int i = 0; i <= 9; i++) {
+			isbnSum += ((10 - i) * isbn[i]);
+		}
+		if (isbnSum % 11 == 0) {
+			return true;
+		} 
 		return false;
 	}
 
