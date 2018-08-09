@@ -2,9 +2,9 @@ package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -700,7 +700,6 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Temporal getGigasecondDate(Temporal given) {
-		// TODO Write an implementation for this method declaration
 		return null;
 	}
 
@@ -718,8 +717,19 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		Set<Integer> multiples = new HashSet<Integer>();
+		for (int j = 0; j < set.length; j++) {
+			int count = 1;
+			while (set[j] * count < i) {
+				multiples.add(set[j]*count);
+				count++;
+			}
+		}
+		int sum = 0;
+		for (int k : multiples) {
+			sum += k;
+		}
+		return sum;
 	}
 
 	/**
