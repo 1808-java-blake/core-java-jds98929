@@ -590,8 +590,20 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String decode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			String alphabet = "abcdefghijklmnopqrstuvwxyz";
+			String message = "";
+			for(int i = 0; i < string.length(); i++) {
+				if (Character.isLetter(string.charAt(i))) {
+					char currentChar = string.charAt(i);
+					int index = alphabet.indexOf(currentChar);
+				    int newIndex = alphabet.length() - index - 1;
+					message += alphabet.charAt(newIndex);
+				} 
+				if (Character.isDigit(string.charAt(i))) {
+					message += string.charAt(i);
+				}
+			}
+			return message;
 		}
 	}
 
