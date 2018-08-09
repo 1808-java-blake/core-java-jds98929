@@ -2,9 +2,12 @@ package com.revature.eval.java.core;
 
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.HashMap;
+import java.util.Set;
 
 public class EvaluationService {
 
@@ -672,7 +675,19 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isPangram(String string) {
-		// TODO Write an implementation for this method declaration
+		String alphabet = "abcdefghijklmnopqrstuvwxyz";
+		for (int j = 0; j < string.length(); j++) {
+			for (int i = 0; i < 26; i++) {
+				if (string.charAt(j) == alphabet.charAt(i)) {
+					alphabet = alphabet.replace(alphabet.charAt(i), ' ');
+				
+				}
+			}
+		}
+		System.out.println(alphabet);
+		if (alphabet.trim().equals("")) {
+			return true;
+		}
 		return false;
 	}
 
