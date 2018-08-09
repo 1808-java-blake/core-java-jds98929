@@ -1,8 +1,11 @@
 package com.revature.eval.java.core;
 
+import java.time.Duration;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -700,7 +703,13 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Temporal getGigasecondDate(Temporal given) {
-		return null;
+		if(given instanceof LocalDate) {
+            LocalDateTime time = LocalDateTime.of((LocalDate) given, LocalTime.MIN);
+            return time.plus(Duration.ofSeconds(1000000000l));
+        }
+        //if time is included
+        LocalDateTime time = LocalDateTime.from(given);
+        return time.plus(Duration.ofSeconds(1000000000l));
 	}
 
 	/**
@@ -769,10 +778,39 @@ public class EvaluationService {
 	 * @return
 	 */
 	public boolean isLuhnValid(String string) {
-		// TODO Write an implementation for this method declaration
+		int sum = 0;
+		ArrayList<Integer> numbers = new ArrayList<Integer>();
+		StringBuilder sb = new StringBuilder();
+		for(int i = 0; i < string.length(); i++) {
+			if (Character.isDigit(string.charAt(i))) {
+				sb.append(string.charAt(i));
+			} else if (string.charAt(i) != ' ') {
+				return false;
+			}
+		}
+		String newString = sb.toString();
+		for (int i = 0; i < newString.length(); i++) {
+			char c = newString.charAt(i);
+			int z = Character.getNumericValue(c);
+			numbers.add(z);
+		}
+		System.out.println(numbers);
+		for (int i = numbers.size() - 2; i >= 0; i -= 2) {
+			numbers.set(i,numbers.get(i) * 2);
+			if (numbers.get(i) > 9) {
+				numbers.set(i, numbers.get(i) - 9);
+			}
+		}
+		System.out.println(numbers);
+		for (int i = 0; i < numbers.size(); i++) {
+			sum += numbers.get(i);
+		}
+		if (sum % 10 == 0) {
+			return true;
+		}
 		return false;
 	}
-
+ 
 	/**
 	 * 20. Parse and evaluate simple math word problems returning the answer as an
 	 * integer.
