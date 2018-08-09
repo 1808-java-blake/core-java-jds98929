@@ -504,8 +504,24 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int calculateNthPrime(int i) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		boolean isPrime;
+		int num, count;
+		if (i < 1) {
+			throw new IllegalArgumentException();
+		}
+		for(num = 2, count = 0; count < i; ++num) {
+			isPrime = true;
+			for (int j = 2; j < num; j++) {
+				if (num % j == 0) {
+					isPrime = false;
+					break;
+				}
+			}
+			if (isPrime = true) {
+				count++;
+			}
+		}
+		return num - 1;
 	}
 
 	/**
