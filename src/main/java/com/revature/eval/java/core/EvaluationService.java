@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.temporal.Temporal;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -839,7 +840,54 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int solveWordProblem(String string) {
-		// TODO Write an implementation for this method declaration
+		int result, one, two;
+		String op1 = "";
+		String op2 = "";
+		String [] words = string.split(" ");
+		
+		for (int i = 0; i < words[2].length(); i++) {
+			op1 += words[2].charAt(i);
+	    }
+		if (Arrays.asList(string.split(" ")).contains("by")){
+			for (int i = 0; i < words[5].length(); i++) {
+				if (words[5].charAt(i) != '?') {
+					op2 += words[5].charAt(i);
+				}
+			}
+		} else {
+			for (int i = 0; i < words[4].length(); i++) {
+				if (words[4].charAt(i) != '?') {
+					op2 += words[4].charAt(i);
+				}
+			}
+		}
+
+		one = Integer.parseInt(op1);
+		two = Integer.parseInt(op2);
+		
+		
+		if (Arrays.asList(string.split(" ")).contains("plus")){
+			result = one + two;
+			return result;
+		}
+		
+		
+		if (Arrays.asList(string.split(" ")).contains("minus")) {
+			result = one - two;
+			return result;
+		}
+		
+		
+		if (Arrays.asList(string.split(" ")).contains("multiplied")){
+			result = one * two;
+			return result;
+		}
+
+		
+		if (Arrays.asList(string.split(" ")).contains("divided")){
+			result = one / two;
+			return result;
+		}
 		return 0;
 	}
 
