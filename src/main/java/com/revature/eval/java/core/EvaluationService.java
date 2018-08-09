@@ -504,20 +504,20 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int calculateNthPrime(int i) {
-		boolean isPrime;
+		boolean prime;
 		int num, count;
 		if (i < 1) {
 			throw new IllegalArgumentException();
 		}
 		for(num = 2, count = 0; count < i; ++num) {
-			isPrime = true;
+			prime = true;
 			for (int j = 2; j < num; j++) {
 				if (num % j == 0) {
-					isPrime = false;
+					prime = false;
 					break;
 				}
 			}
-			if (isPrime = true) {
+			if (prime = true) {
 				count++;
 			}
 		}
@@ -557,8 +557,30 @@ public class EvaluationService {
 		 * @return
 		 */
 		public static String encode(String string) {
-			// TODO Write an implementation for this method declaration
-			return null;
+			int letterCount = 0;
+			String alphabet = "abcdefghijklmnopqrstuvwxyz";
+			String cypher = "";
+			for(int i = 0; i < string.length(); i++) {
+				if (letterCount == 5) {
+					cypher += " ";
+					letterCount = 0;
+				}
+				if (Character.isLetter(string.charAt(i))) {
+					char currentChar = string.toLowerCase().charAt(i);
+					int index = alphabet.indexOf(currentChar);
+					int newIndex = alphabet.length() - index - 1;
+					cypher += alphabet.charAt(newIndex);
+					letterCount++;
+				} else if (Character.isDigit(string.charAt(i))){
+					cypher += string.charAt(i);
+					letterCount++;
+				}
+					
+			}
+			if (cypher.charAt(cypher.length() - 1) == ' ') {
+				return cypher.substring(0, cypher.length() - 1);
+			}
+			return cypher;
 		}
 
 		/**
