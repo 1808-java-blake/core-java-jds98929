@@ -318,7 +318,11 @@ public class EvaluationService {
 			int index;
 			while (!subList.isEmpty()) {
 				int upperLimit = subList.size();
-				index = subList.size() / 2;
+				if (upperLimit%2 == 0) {
+					index = subList.size() / 2;
+				} else {
+					index = subList.size() / 2 - 1;
+				}
 				T key = subList.get(index);
 				if (key.compareTo(t) == 0) {
 					return this.getSortedList().indexOf(key);
